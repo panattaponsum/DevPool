@@ -1,6 +1,3 @@
-
-
-
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon   = document.getElementById('themeIcon');
 
@@ -9,15 +6,15 @@ const savedTheme = localStorage.getItem('theme') || 'light';
 applyTheme(savedTheme);
 
 themeToggle.addEventListener('click', function () {
-  
+
   const current = document.documentElement.getAttribute('data-theme');
   const next    = current === 'dark' ? 'light' : 'dark';
   applyTheme(next);
-  localStorage.setItem('theme', next);  
+  localStorage.setItem('theme', next);
 });
 
 function applyTheme(theme) {
-  
+
   document.documentElement.setAttribute('data-theme', theme);
   themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
@@ -27,7 +24,7 @@ const unitDetail = document.getElementById('unitDetail');
 const unitArrow  = document.getElementById('unitArrow');
 
 toggleUnit.addEventListener('click', function () {
-  
+
   const isOpen = unitDetail.classList.contains('open');
 
   if (isOpen) {
@@ -61,34 +58,19 @@ greetInput.addEventListener('input', function () {
 });
 
 
-/* ── 4. CLICK COUNTER + RING ANIMATION ──────────────────── */
-const clickBtn   = document.getElementById('clickBtn');
-const clickCount = document.getElementById('clickCount');
-const ringFill   = document.getElementById('ringFill');
+/* ── 4. LIKE COUNTER ────────────────────────────────────── */
+const likeBtn   = document.getElementById('likeBtn');
+const likeCount = document.getElementById('likeCount');
 
-// SVG circle r=54 → circumference = 2π×54 ≈ 339.3
-const CIRCUMFERENCE = 2 * Math.PI * 54;
-const MAX_CLICKS    = 20;   // ครบรอบวงแหวนที่ 20 คลิก
+let likes = 0;
 
-let count = 0;
+likeBtn.addEventListener('click', function () {
+  likes++;
+  likeCount.textContent = likes.toLocaleString('th-TH');
 
-clickBtn.addEventListener('click', function () {
-  count++;
-  clickCount.textContent = count;
-
-  // คำนวณ stroke-dashoffset ให้วงแหวนเติมตามสัดส่วน
-  const progress = Math.min(count / MAX_CLICKS, 1);  // 0 → 1
-  const offset   = CIRCUMFERENCE * (1 - progress);
-  ringFill.style.strokeDashoffset = offset;
-
-  // เมื่อถึง MAX_CLICKS ให้วงแหวนวิ้งกลับต้น
-  if (count >= MAX_CLICKS) {
-    setTimeout(function () {
-      count = 0;
-      clickCount.textContent = '0';
-      ringFill.style.strokeDashoffset = CIRCUMFERENCE;
-    }, 800);
-  }
+  likeBtn.classList.remove('liked');
+  void likeBtn.offsetWidth;
+  likeBtn.classList.add('liked');
 });
 
 
