@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ปณัฐพล สุมาลัย — DevPool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Style.css" />
+</head>
+<body>
+
+  <!-- ── NAV BAR ── -->
+  <nav class="nav">
+    <span class="nav-logo">PANATTAPON <span class="accent">S.</span></span>
+    <button id="themeToggle" class="btn-icon" aria-label="สลับธีม">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">วิศวกร ระดับ 5 · กฟภ.</p>
+        <h3 class="name">ปณัฐพล<br /><span class="name-sub">สุมาลัย</span></h3>
+        <p class="name-nick">ชื่อเล่น <strong>นาย</strong></p>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-ring">
+          <svg viewBox="0 0 120 120" class="ring-svg" aria-hidden="true">
+            <circle cx="60" cy="60" r="54" class="ring-track" />
+            <circle cx="60" cy="60" r="54" class="ring-fill" id="ringFill" />
+          </svg>
+          <div class="badge-inner">
+            <span class="badge-num" id="clickCount">0</span>
+            <span class="badge-label">คลิก</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="clickBtn">กด!</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ── SECTION: UNIT ── -->
+    <section class="card" id="unitSection">
+      <div class="card-header">
+        <span class="tag">สังกัด</span>
+        <button class="btn-expand" id="toggleUnit" aria-expanded="false" aria-controls="unitDetail">
+          ดูรายละเอียด <span class="arrow" id="unitArrow">▸</span>
+        </button>
+      </div>
+      <h2 class="card-title">กองเทคโนโลยีโครงข่ายไฟฟ้า</h2>
+      <div class="card-collapse" id="unitDetail">
+        <ul class="detail-list">
+          <li><span class="dot"></span>ฝ่ายปฏิบัติการและเทคโนโลยีโครงข่ายไฟฟ้า</li>
+          <li><span class="dot"></span>สายงาน: ปฏิบัติการ</li>
+          <li><span class="dot"></span>การไฟฟ้าส่วนภูมิภาค (กฟภ.)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── SECTION: REASON ── -->
+    <section class="card card--accent">
+      <span class="tag">เหตุผลที่อยากเข้า DevPool</span>
+      <p class="card-body">
+        ผมชื่นชอบการพัฒนาซอฟต์แวร์และอยากยกระดับความรู้ด้านนี้อย่างจริงจัง
+        โดยเฉพาะการมีส่วนร่วมกับทีมที่พัฒนาระบบหลังบ้านของการไฟฟ้า
+        เพื่อให้งานที่ทำอยู่ทุกวันนี้เชื่อมต่อกับเทคโนโลยีใหม่ ๆ ได้จริง
+      </p>
+    </section>
+
+    <!-- ── SECTION: LIVE INPUT ── -->
+    <section class="card">
+      <span class="tag">ทดลองพิมพ์</span>
+      <h2 class="card-title">คุณจะทักทายว่าอะไร?</h2>
+      <div class="input-wrap">
+        <input
+          type="text"
+          id="greetInput"
+          class="text-input"
+          placeholder="พิมพ์ที่นี่..."
+          maxlength="60"
+        />
+      </div>
+      <div class="live-output" id="liveOutput">
+        <span class="output-placeholder">ผลลัพธ์จะปรากฏที่นี่</span>
+      </div>
+    </section>
+
+    <!-- ── SECTION: GOLD PRICE (API) ── -->
+    <section class="card card--dark" id="goldSection">
+      <div class="gold-header">
+        <div>
+          <span class="tag tag--light">Bonus · Live Data</span>
+          <h2 class="card-title card-title--light">ราคาทองคำเรียลไทม์</h2>
+          <p class="gold-subtitle">แกน Y = ราคาทอง (USD/oz) · แกน X = ช่วงเวลา</p>
+        </div>
+        <div class="gold-refresh-wrap">
+          <span class="gold-countdown" id="goldCountdown">อัปเดตทุก 1 วิ</span>
+          <button class="btn-refresh" id="goldRefreshBtn" title="รีเฟรชทันที">↻</button>
+        </div>
+      </div>
+
+      <div id="goldContent" class="gold-content">
+        <div class="gold-loading" id="goldLoading">
+          <span class="spinner"></span> กำลังโหลดข้อมูล…
+        </div>
+
+        <div class="gold-data hidden" id="goldData">
+          <div class="gold-row">
+            <div class="gold-item">
+              <span class="gold-label">ราคาซื้อ (USD/oz)</span>
+              <span class="gold-val" id="goldBid">—</span>
+            </div>
+            <div class="gold-item">
+              <span class="gold-label">ราคาขาย (USD/oz)</span>
+              <span class="gold-val" id="goldAsk">—</span>
+            </div>
+            <div class="gold-item">
+              <span class="gold-label">เทียบ 00:00 วันนี้</span>
+              <span class="gold-val gold-change-val" id="goldChange">—</span>
+            </div>
+          </div>
+          <p class="gold-ts" id="goldTs"></p>
+        </div>
+
+        <div class="gold-error hidden" id="goldError">
+          ⚠️ ไม่สามารถโหลดข้อมูลได้ในขณะนี้
+          <button class="btn-retry" id="goldRetryBtn">ลองใหม่</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION: HOVER CARD ── -->
+    <section class="card">
+      <span class="tag">ทักษะ</span>
+      <div class="skill-grid">
+        <div class="skill-card" data-detail="ระบบไฟฟ้า แรงสูง/แรงต่ำ — หัวใจหลักของงาน กฟภ.">
+          <span class="skill-icon">⚡</span>
+          <span class="skill-name">ระบบไฟฟ้า</span>
+          <span class="skill-hover-text"></span>
+        </div>
+        <div class="skill-card" data-detail="Controller Operations — ดูแลอุปกรณ์ควบคุมระบบไมโครกริด">
+          <span class="skill-icon">🔌</span>
+          <span class="skill-name">โครงข่าย</span>
+          <span class="skill-hover-text"></span>
+        </div>
+        <div class="skill-card" data-detail="Software Development — สิ่งที่อยากพัฒนาต่อใน DevPool">
+          <span class="skill-icon">💻</span>
+          <span class="skill-name">Dev</span>
+          <span class="skill-hover-text"></span>
+        </div>
+        <div class="skill-card" data-detail="Data & Automation — ใช้ข้อมูลขับเคลื่อนการตัดสินใจ">
+          <span class="skill-icon">📊</span>
+          <span class="skill-name">Data</span>
+          <span class="skill-hover-text"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>ปณัฐพล สุมาลัย · กองเทคโนโลยีโครงข่ายไฟฟ้า · กฟภ.</p>
+  </footer>
+
+  <script src="Main.js"></script>
+</body>
+</html>
