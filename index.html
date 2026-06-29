@@ -27,18 +27,13 @@
         <h3 class="name">ปณัฐพล<br /><span class="name-sub">สุมาลัย</span></h3>
         <p class="name-nick">ชื่อเล่น <strong>นาย</strong></p>
       </div>
-      <div class="hero-badge">
-        <div class="badge-ring">
-          <svg viewBox="0 0 120 120" class="ring-svg" aria-hidden="true">
-            <circle cx="60" cy="60" r="54" class="ring-track" />
-            <circle cx="60" cy="60" r="54" class="ring-fill" id="ringFill" />
-          </svg>
-          <div class="badge-inner">
-            <span class="badge-num" id="clickCount">0</span>
-            <span class="badge-label">คลิก</span>
-          </div>
+      <div class="hero-badge like-panel">
+        <div class="like-count-card" aria-live="polite">
+          <span class="like-icon" aria-hidden="true">❤️</span>
+          <span class="badge-num" id="likeCount">0</span>
+          <span class="badge-label">ไลค์</span>
         </div>
-        <button class="btn-primary" id="clickBtn">กด!</button>
+        <button class="btn-primary btn-like" id="likeBtn" type="button">กดไลค์</button>
       </div>
     </div>
   </header>
