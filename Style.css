@@ -1,4 +1,3 @@
-/* ─── TOKENS ───────────────────────────────────────────── */
 :root {
   --bg:        #F0F4FF;
   --bg2:       #FFFFFF;
@@ -122,7 +121,7 @@ body {
   margin-top: 0.5rem;
 }
 
-/* ─── BADGE / CLICK COUNTER ──────────────────────────────── */
+/* ─── LIKE COUNTER ──────────────────────────────────────── */
 .hero-badge {
   display: flex;
   flex-direction: column;
@@ -130,41 +129,25 @@ body {
   gap: 1rem;
 }
 
-.badge-ring {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.ring-svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.ring-track {
-  fill: none;
-  stroke: var(--border);
-  stroke-width: 7;
-}
-
-.ring-fill {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 339.3;
-  stroke-dashoffset: 339.3;
-  transition: stroke-dashoffset 0.4s ease;
-}
-
-.badge-inner {
-  position: absolute;
-  inset: 0;
+.like-count-card {
+  min-width: 136px;
+  min-height: 136px;
+  padding: 1.1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
+  background: linear-gradient(145deg, var(--accent2), var(--bg2));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.like-icon {
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 6px 12px rgba(220,38,38,.22));
 }
 
 .badge-num {
@@ -200,6 +183,30 @@ body {
 
 .btn-primary:hover {
   box-shadow: 0 6px 20px rgba(26,86,219,.45);
+}
+
+.btn-like {
+  background: linear-gradient(135deg, #EF4444, #EC4899);
+  box-shadow: 0 4px 14px rgba(236,72,153,.28);
+}
+
+.btn-like::before {
+  content: '❤';
+  margin-right: 0.45rem;
+}
+
+.btn-like:hover {
+  box-shadow: 0 6px 20px rgba(236,72,153,.42);
+}
+
+.btn-like.liked {
+  animation: like-pop 0.35s ease;
+}
+
+@keyframes like-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
 /* ─── CONTAINER / CARDS ──────────────────────────────────── */
@@ -484,8 +491,8 @@ gold-explain h3 {
   padding-left: 1.25rem;
 }
 
-.gold-explain li + li { 
-  margin-top: 0.25rem; 
+.gold-explain li + li {
+  margin-top: 0.25rem;
 }
 
 .gold-change-val {
